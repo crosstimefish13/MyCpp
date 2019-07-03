@@ -34,3 +34,4 @@
 # VS Code
 *.ipch
 *.bin
+/.vscode/ipch/
