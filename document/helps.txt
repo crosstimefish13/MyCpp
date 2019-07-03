@@ -1,4 +1,5 @@
-git提交忽略文件或文件夹: https://www.cnblogs.com/e206842/p/7121927.html
+﻿git提交忽略文件或文件夹: https://www.cnblogs.com/e206842/p/7121927.html
 vscode c++ 的环境配置 （完美版）: https://blog.csdn.net/qq_43041976/article/details/88544632
 使用 VSCode 搭建 C/C++ 开发环境: https://www.jianshu.com/p/8933ebdac814
 MinGW安装教程: https://www.cnblogs.com/ggg-327931457/p/9694401.html
+VSCode 同步设置及扩展插件 实现设备上设置统一: https://www.cnblogs.com/kenz520/p/7416836.html
