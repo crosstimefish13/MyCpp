@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "MinGW GDB vsc-cpp",
+            "name": "MinGW GDB",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/vsc-cpp/vsc-cpp.exe",
+            "program": "${workspaceRoot}/vsc-cpp.exe",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
@@ -23,7 +23,7 @@
                     "ignoreFailures": false
                 }
             ],
-            "preLaunchTask": "MinGW Debug vsc-cpp"
+            "preLaunchTask": "MinGW Debug"
         }
     ]
 }

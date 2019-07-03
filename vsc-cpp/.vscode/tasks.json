@@ -2,16 +2,16 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "MinGW Debug vsc-cpp",
+            "label": "MinGW Debug",
             "type": "shell",
             "command": "g++",
             "args": [
                 "-g",
-                "vsc-cpp/main.cpp",
-                "vsc-cpp/add.cpp",
-                "vsc-cpp/sub.cpp",
+                "main.cpp",
+                "add.cpp",
+                "sub.cpp",
                 "-o",
-                "vsc-cpp/vsc-cpp.exe"
+                "vsc-cpp.exe"
             ]
         },
         {
