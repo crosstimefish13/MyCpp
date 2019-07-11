@@ -1,5 +1,69 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "basic_sort_lib.h"
+
+#define BSL_DATA_TYPE void
+
+void set_data_type(const BSL_E_TYPE ce_type)
+{
+#undef BSL_DATA_TYPE
+    if (ce_type == BSL_E_TYPE_S)
+    {
+#define BSL_DATA_TYPE short
+    }
+    else if (ce_type == BSL_E_TYPE_I)
+    {
+#define BSL_DATA_TYPE int
+    }
+    else if (ce_type == BSL_E_TYPE_L)
+    {
+#define BSL_DATA_TYPE long
+    }
+    else if (ce_type == BSL_E_TYPE_LI)
+    {
+#define BSL_DATA_TYPE long int
+    }
+    else if (ce_type == BSL_E_TYPE_LL)
+    {
+#define BSL_DATA_TYPE long long
+    }
+    else if (ce_type == BSL_E_TYPE_US)
+    {
+#define BSL_DATA_TYPE unsigned short
+    }
+    else if (ce_type == BSL_E_TYPE_UI)
+    {
+#define BSL_DATA_TYPE unsigned int
+    }
+    else if (ce_type == BSL_E_TYPE_UL)
+    {
+#define BSL_DATA_TYPE unsigned long
+    }
+    else if (ce_type == BSL_E_TYPE_ULI)
+    {
+#define BSL_DATA_TYPE unsigned long int
+    }
+    else if (ce_type == BSL_E_TYPE_ULL)
+    {
+#define BSL_DATA_TYPE unsigned long long
+    }
+    else if (ce_type == BSL_E_TYPE_F)
+    {
+#define BSL_DATA_TYPE float
+    }
+    else if (ce_type == BSL_E_TYPE_D)
+    {
+#define BSL_DATA_TYPE double
+    }
+    else if (ce_type == BSL_E_TYPE_LD)
+    {
+#define BSL_DATA_TYPE long double
+    }
+//     else
+//     {
+// #define BSL_DATA_TYPE void
+//     }
+}
 
 void *get_value(const void *cvp_array, const BSL_E_TYPE ce_type, const unsigned long long cull_index)
 {
@@ -193,12 +257,35 @@ short is_smaller_or_equal(const void *cvp_value_left, const void *cvp_value_righ
     return s_result;
 }
 
-void bsl_bubble(void *p_array, const BSL_E_TYPE ce_type, const unsigned long long cull_length)
+BSL_DATA_TYPE *get_value(BSL_DATA_TYPE *dtp_array, const unsigned long long cull_index)
 {
-    void *p_value_3 = get_value(p_array, ce_type, 3ull);
-    void *p_value_2 = get_value(p_array, ce_type, 2ull);
-    *(int *)p_value_3 = *(int *)p_value_2;
+    (dtp_array + cull_index)
+}
+
+void bsl_bubble(void *vp_array, const unsigned long long cull_length, const BSL_E_TYPE ce_type)
+{
+    set_data_type(ce_type);
+    BSL_DATA_TYPE *dtp_array = (BSL_DATA_TYPE *)vp_array;
+    BSL_DATA_TYPE *dtp_switch = (BSL_DATA_TYPE *)malloc(sizeof(BSL_DATA_TYPE));
+
+    for (unsigned long long i = 0; i < cull_length; i++)
+    {
+        for (unsigned long long j = 1; j < cull_length - i; j++)
+        {
+            BSL_DATA_TYPE dt_previous = *(dtp_array + j);
+        }
+        
+    }
+    
+
+    free(dtp_switch);
+
+    // BSL_DATA_TYPE *p_value_3 = (BSL_DATA_TYPE)p_array;
+
+    // void *p_value_3 = get_value(p_array, ce_type, 3ull);
+    // void *p_value_2 = get_value(p_array, ce_type, 2ull);
+    // *(int *)p_value_3 = *(int *)p_value_2;
     // int i_compare = (*(int *)p_value_3) < (*(int *)p_value_2);
 
-    printf("%d\n", *(int *)p_value_3);
+    // printf("%d\n", *(BSL_DATA_TYPE)p_value_3);
 }
