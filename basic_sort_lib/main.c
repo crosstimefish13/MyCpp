@@ -6,7 +6,7 @@ int main()
     printf("test for basic sort library.\n");
 
     int f_array[] = {2, 3, 4, 5, 6};
-    bsl_bubble(f_array, BSL_E_TYPE_I, 5);
+    bsl_bubble(f_array, 5, BSL_E_TYPE_I);
 
     void *p_array = f_array;
     void *p_item_1 = (int *)p_array + 3;

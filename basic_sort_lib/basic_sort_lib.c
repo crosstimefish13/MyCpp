@@ -1,284 +1,136 @@
 #include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include "basic_sort_lib.h"
 
-#define BSL_DATA_TYPE void
-
-void set_data_type(const BSL_E_TYPE ce_type)
+void *get_vp_value(const void *cvp_array, const unsigned long long int culli_index, const BSL_E_TYPE ce_type)
 {
-#undef BSL_DATA_TYPE
+    void *vp_value = NULL;
     if (ce_type == BSL_E_TYPE_S)
-    {
-#define BSL_DATA_TYPE short
-    }
+        vp_value = (short *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_I)
-    {
-#define BSL_DATA_TYPE int
-    }
-    else if (ce_type == BSL_E_TYPE_L)
-    {
-#define BSL_DATA_TYPE long
-    }
+        vp_value = (int *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_LI)
-    {
-#define BSL_DATA_TYPE long int
-    }
-    else if (ce_type == BSL_E_TYPE_LL)
-    {
-#define BSL_DATA_TYPE long long
-    }
+        vp_value = (long int *)cvp_array + culli_index;
+    else if (ce_type == BSL_E_TYPE_LLI)
+        vp_value = (long long int *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_US)
-    {
-#define BSL_DATA_TYPE unsigned short
-    }
+        vp_value = (unsigned short *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_UI)
-    {
-#define BSL_DATA_TYPE unsigned int
-    }
-    else if (ce_type == BSL_E_TYPE_UL)
-    {
-#define BSL_DATA_TYPE unsigned long
-    }
+        vp_value = (unsigned int *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_ULI)
-    {
-#define BSL_DATA_TYPE unsigned long int
-    }
-    else if (ce_type == BSL_E_TYPE_ULL)
-    {
-#define BSL_DATA_TYPE unsigned long long
-    }
+        vp_value = (unsigned long int *)cvp_array + culli_index;
+    else if (ce_type == BSL_E_TYPE_ULLI)
+        vp_value = (unsigned long long int *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_F)
-    {
-#define BSL_DATA_TYPE float
-    }
+        vp_value = (float *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_D)
-    {
-#define BSL_DATA_TYPE double
-    }
+        vp_value = (double *)cvp_array + culli_index;
     else if (ce_type == BSL_E_TYPE_LD)
-    {
-#define BSL_DATA_TYPE long double
-    }
-//     else
-//     {
-// #define BSL_DATA_TYPE void
-//     }
+        vp_value = (long double *)cvp_array + culli_index;
+    return vp_value;
 }
 
-void *get_value(const void *cvp_array, const BSL_E_TYPE ce_type, const unsigned long long cull_index)
+void *set_vp_value(const void *cvp_target, const void *cvp_value, const BSL_E_TYPE ce_type)
 {
-    void *p_value = NULL;
-
-    switch (ce_type)
-    {
-    case BSL_E_TYPE_S:
-        p_value = (short *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_I:
-        p_value = (int *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_L:
-        p_value = (long *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_LI:
-        p_value = (long int *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_LL:
-        p_value = (long long *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_US:
-        p_value = (unsigned short *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_UI:
-        p_value = (unsigned int *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_UL:
-        p_value = (unsigned long *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_ULI:
-        p_value = (unsigned long int *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_ULL:
-        p_value = (unsigned long long *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_F:
-        p_value = (float *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_D:
-        p_value = (double *)cvp_array + cull_index;
-        break;
-
-    case BSL_E_TYPE_LD:
-        p_value = (long double *)cvp_array + cull_index;
-        break;
-
-    default:
-        p_value = NULL;
-        break;
-    }
-
-    return p_value;
+    unsigned int ui_size = 0;
+    if (ce_type == BSL_E_TYPE_S)
+        ui_size = sizeof(short);
+    else if (ce_type == BSL_E_TYPE_I)
+        ui_size = sizeof(int);
+    else if (ce_type == BSL_E_TYPE_LI)
+        ui_size = sizeof(long int);
+    else if (ce_type == BSL_E_TYPE_LLI)
+        ui_size = sizeof(long long int);
+    else if (ce_type == BSL_E_TYPE_US)
+        ui_size = sizeof(unsigned short);
+    else if (ce_type == BSL_E_TYPE_UI)
+        ui_size = sizeof(unsigned int);
+    else if (ce_type == BSL_E_TYPE_ULI)
+        ui_size = sizeof(unsigned long int);
+    else if (ce_type == BSL_E_TYPE_ULLI)
+        ui_size = sizeof(unsigned long long int);
+    else if (ce_type == BSL_E_TYPE_F)
+        ui_size = sizeof(float);
+    else if (ce_type == BSL_E_TYPE_D)
+        ui_size = sizeof(double);
+    else if (ce_type == BSL_E_TYPE_LD)
+        ui_size = sizeof(long double);
+    memcpy(cvp_target, cvp_value, ui_size);
 }
 
-void set_value(const void *cvp_value_source, const void *cvp_value_target, const BSL_E_TYPE ce_type)
-{
-    switch (ce_type)
-    {
-    case BSL_E_TYPE_S:
-        *(short *)cvp_value_source = *(short *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_I:
-        *(int *)cvp_value_source = *(int *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_L:
-        *(long *)cvp_value_source = *(long *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_LI:
-        *(long int *)cvp_value_source = *(long int *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_LL:
-        *(long long *)cvp_value_source = *(long long *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_US:
-        *(unsigned short *)cvp_value_source = *(unsigned short *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_UI:
-        *(unsigned int *)cvp_value_source = *(unsigned int *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_UL:
-        *(unsigned long *)cvp_value_source = *(unsigned long *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_ULI:
-        *(unsigned long int *)cvp_value_source = *(unsigned long int *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_ULL:
-        *(unsigned long long *)cvp_value_source = *(unsigned long long *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_F:
-        *(float *)cvp_value_source = *(float *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_D:
-        *(double *)cvp_value_source = *(double *)cvp_value_target;
-        break;
-
-    case BSL_E_TYPE_LD:
-        *(long double *)cvp_value_source = *(long double *)cvp_value_target;
-        break;
-
-    default:
-        break;
-    }
-}
-
-short is_smaller_or_equal(const void *cvp_value_left, const void *cvp_value_right, const BSL_E_TYPE ce_type)
+short is_samller(const void *cvp_left, const void *cvp_right, const BSL_E_TYPE ce_type)
 {
     short s_result = -1;
-    switch (ce_type)
-    {
-    case BSL_E_TYPE_S:
-        s_result = *(short *)cvp_value_left <= *(short *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_I:
-        s_result = *(int *)cvp_value_left <= *(int *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_L:
-        s_result = *(long *)cvp_value_left <= *(long *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_LI:
-        s_result = *(long int *)cvp_value_left <= *(long int *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_LL:
-        s_result = *(long long *)cvp_value_left <= *(long long *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_US:
-        s_result = *(unsigned short *)cvp_value_left <= *(unsigned short *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_UI:
-        s_result = *(unsigned int *)cvp_value_left <= *(unsigned int *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_UL:
-        s_result = *(unsigned long *)cvp_value_left <= *(unsigned long *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_ULI:
-        s_result = *(unsigned long int *)cvp_value_left <= *(unsigned long int *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_ULL:
-        s_result = *(unsigned long long *)cvp_value_left <= *(unsigned long long *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_F:
-        s_result = *(float *)cvp_value_left <= *(float *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_D:
-        s_result = *(double *)cvp_value_left <= *(double *)cvp_value_right;
-        break;
-
-    case BSL_E_TYPE_LD:
-        s_result = *(long double *)cvp_value_left <= *(long double *)cvp_value_right;
-        break;
-
-    default:
-        s_result = -1;
-        break;
-    }
-
+    if (ce_type == BSL_E_TYPE_S)
+        s_result = *(short *)cvp_left < *(short *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_I)
+        s_result = *(int *)cvp_left < *(int *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_LI)
+        s_result = *(long int *)cvp_left < *(long int *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_LLI)
+        s_result = *(long long int *)cvp_left < *(long long int *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_US)
+        s_result = *(unsigned short *)cvp_left < *(unsigned short *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_UI)
+        s_result = *(unsigned int *)cvp_left < *(unsigned int *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_ULI)
+        s_result = *(unsigned long int *)cvp_left < *(unsigned long int *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_ULLI)
+        s_result = *(unsigned long long int *)cvp_left < *(unsigned long long int *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_F)
+        s_result = *(float *)cvp_left < *(float *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_D)
+        s_result = *(double *)cvp_left < *(double *)cvp_right;
+    else if (ce_type == BSL_E_TYPE_LD)
+        s_result = *(long double *)cvp_left < *(long double *)cvp_right;
     return s_result;
 }
 
-BSL_DATA_TYPE *get_value(BSL_DATA_TYPE *dtp_array, const unsigned long long cull_index)
+void *malloc_vp_array(const BSL_E_TYPE ce_type, const unsigned long long int culli_length)
 {
-    (dtp_array + cull_index)
+    void *vp_array = NULL;
+    if (ce_type == BSL_E_TYPE_S)
+        vp_array = (short *)malloc(culli_length * sizeof(short));
+    else if (ce_type == BSL_E_TYPE_I)
+        vp_array = (int *)malloc(culli_length * sizeof(int));
+    else if (ce_type == BSL_E_TYPE_LI)
+        vp_array = (long int *)malloc(culli_length * sizeof(long int));
+    else if (ce_type == BSL_E_TYPE_LLI)
+        vp_array = (long long int *)malloc(culli_length * sizeof(long long int));
+    else if (ce_type == BSL_E_TYPE_US)
+        vp_array = (unsigned short *)malloc(culli_length * sizeof(unsigned short));
+    else if (ce_type == BSL_E_TYPE_UI)
+        vp_array = (unsigned int *)malloc(culli_length * sizeof(unsigned int));
+    else if (ce_type == BSL_E_TYPE_ULI)
+        vp_array = (unsigned long int *)malloc(culli_length * sizeof(unsigned long int));
+    else if (ce_type == BSL_E_TYPE_ULLI)
+        vp_array = (unsigned long long int *)malloc(culli_length * sizeof(unsigned long long int));
+    else if (ce_type == BSL_E_TYPE_F)
+        vp_array = (float *)malloc(culli_length * sizeof(float));
+    else if (ce_type == BSL_E_TYPE_D)
+        vp_array = (double *)malloc(culli_length * sizeof(double));
+    else if (ce_type == BSL_E_TYPE_LD)
+        vp_array = (long double *)malloc(culli_length * sizeof(long double));
+    return vp_array;
 }
 
-void bsl_bubble(void *vp_array, const unsigned long long cull_length, const BSL_E_TYPE ce_type)
+void bsl_bubble(void *vp_array, const unsigned long long int culli_length, const BSL_E_TYPE ce_type)
 {
-    set_data_type(ce_type);
-    BSL_DATA_TYPE *dtp_array = (BSL_DATA_TYPE *)vp_array;
-    BSL_DATA_TYPE *dtp_switch = (BSL_DATA_TYPE *)malloc(sizeof(BSL_DATA_TYPE));
+    void *vp_value = get_vp_value(vp_array, 3, ce_type);
+    // set_data_type(ce_type);
+    // BSL_DATA_TYPE *dtp_array = (BSL_DATA_TYPE *)vp_array;
+    // BSL_DATA_TYPE *dtp_switch = (BSL_DATA_TYPE *)malloc(sizeof(BSL_DATA_TYPE));
 
-    for (unsigned long long i = 0; i < cull_length; i++)
-    {
-        for (unsigned long long j = 1; j < cull_length - i; j++)
-        {
-            BSL_DATA_TYPE dt_previous = *(dtp_array + j);
-        }
-        
-    }
-    
+    // for (unsigned long long i = 0; i < cull_length; i++)
+    // {
+    //     for (unsigned long long j = 1; j < cull_length - i; j++)
+    //     {
+    //         BSL_DATA_TYPE dt_previous = *(dtp_array + j);
+    //     }
+    // }
 
-    free(dtp_switch);
+    // free(dtp_switch);
 
     // BSL_DATA_TYPE *p_value_3 = (BSL_DATA_TYPE)p_array;
 
@@ -287,5 +139,5 @@ void bsl_bubble(void *vp_array, const unsigned long long cull_length, const BSL_
     // *(int *)p_value_3 = *(int *)p_value_2;
     // int i_compare = (*(int *)p_value_3) < (*(int *)p_value_2);
 
-    // printf("%d\n", *(BSL_DATA_TYPE)p_value_3);
+    printf("%d\n", *(int *)vp_value);
 }
