@@ -9,6 +9,7 @@
             "command": "g++",
             "args": [
                 "-g",
+                "basic_sort_lib.c",
                 "main.c",
                 "-o",
                 "basic_sort_lib_debug.exe"
