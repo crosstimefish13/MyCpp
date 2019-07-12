@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stddef.h>
+#include <string.h>
 #include <stdlib.h>
 #include "basic_sort_lib.h"
 
@@ -31,7 +30,7 @@ void *get_vp_value(const void *cvp_array, const unsigned long long int culli_ind
     return vp_value;
 }
 
-void *set_vp_value(const void *cvp_target, const void *cvp_value, const BSL_E_TYPE ce_type)
+void set_vp_value(void *cvp_target, const void *cvp_value, const BSL_E_TYPE ce_type)
 {
     unsigned int ui_size = 0;
     if (ce_type == BSL_E_TYPE_S)
@@ -117,27 +116,21 @@ void *malloc_vp_array(const BSL_E_TYPE ce_type, const unsigned long long int cul
 
 void bsl_bubble(void *vp_array, const unsigned long long int culli_length, const BSL_E_TYPE ce_type)
 {
-    void *vp_value = get_vp_value(vp_array, 3, ce_type);
-    // set_data_type(ce_type);
-    // BSL_DATA_TYPE *dtp_array = (BSL_DATA_TYPE *)vp_array;
-    // BSL_DATA_TYPE *dtp_switch = (BSL_DATA_TYPE *)malloc(sizeof(BSL_DATA_TYPE));
+    void *vp_switch = malloc_vp_array(ce_type, 1);
+    for (unsigned long long int i = 0; i < culli_length; i++)
+    {
+        for (unsigned long long int j = 1; j < culli_length - i; j++)
+        {
+            void *vp_previous_value = get_vp_value(vp_array, j - 1, ce_type);
+            void *vp_current_value = get_vp_value(vp_array, j, ce_type);
+            if (is_samller(vp_current_value, vp_previous_value, ce_type) == 1)
+            {
+                set_vp_value(vp_switch, vp_current_value, ce_type);
+                set_vp_value(vp_current_value, vp_previous_value, ce_type);
+                set_vp_value(vp_previous_value, vp_switch, ce_type);
+            }
+        }
+    }
 
-    // for (unsigned long long i = 0; i < cull_length; i++)
-    // {
-    //     for (unsigned long long j = 1; j < cull_length - i; j++)
-    //     {
-    //         BSL_DATA_TYPE dt_previous = *(dtp_array + j);
-    //     }
-    // }
-
-    // free(dtp_switch);
-
-    // BSL_DATA_TYPE *p_value_3 = (BSL_DATA_TYPE)p_array;
-
-    // void *p_value_3 = get_value(p_array, ce_type, 3ull);
-    // void *p_value_2 = get_value(p_array, ce_type, 2ull);
-    // *(int *)p_value_3 = *(int *)p_value_2;
-    // int i_compare = (*(int *)p_value_3) < (*(int *)p_value_2);
-
-    printf("%d\n", *(int *)vp_value);
+    free(vp_switch);
 }

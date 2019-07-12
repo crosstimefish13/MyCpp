@@ -5,14 +5,9 @@ int main()
 {
     printf("test for basic sort library.\n");
 
-    int f_array[] = {2, 3, 4, 5, 6};
-    bsl_bubble(f_array, 5, BSL_E_TYPE_I);
-
-    void *p_array = f_array;
-    void *p_item_1 = (int *)p_array + 3;
-
-    printf("%d\n", f_array[3]);
-    printf("%d\n", *(int *)p_item_1);
+    float f_array[] = {6.0f, 2.0f, 4.0f, 5.0f, 3.0f};
+    bsl_bubble(f_array, 5, BSL_E_TYPE_F);
+    printf("%f %f %f %f %f\n", f_array[0], f_array[1], f_array[2], f_array[3], f_array[4]);
 
     return 0;
 }
