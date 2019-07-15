@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "MinGW GDB",
+            "name": "debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/basic_sort_lib_debug.exe",
+            "program": "${workspaceRoot}/output/debug/bin/basic_sort_lib.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -23,7 +23,7 @@
                     "ignoreFailures": false
                 }
             ],
-            "preLaunchTask": "MinGW Debug"
+            "preLaunchTask": "build_debug"
         }
     ]
 }
