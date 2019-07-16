@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "basic_sort/header/basic_sort.h"
 
 void *get_vp_value(const void *cvp_array, const unsigned long long int culli_index, const BS_E_TYPE ce_type)
@@ -58,9 +59,9 @@ void set_vp_value(void *cvp_target, const void *cvp_value, const BS_E_TYPE ce_ty
     memcpy(cvp_target, cvp_value, ui_size);
 }
 
-short is_samller(const void *cvp_left, const void *cvp_right, const BS_E_TYPE ce_type)
+bool is_samller(const void *cvp_left, const void *cvp_right, const BS_E_TYPE ce_type)
 {
-    short s_result = -1;
+    bool s_result = false;
     if (ce_type == BS_E_TYPE_S)
         s_result = *(short *)cvp_left < *(short *)cvp_right;
     else if (ce_type == BS_E_TYPE_I)
@@ -123,7 +124,7 @@ void bs_bubble(void *vp_array, const unsigned long long int culli_length, const 
         {
             void *vp_previous_value = get_vp_value(vp_array, j - 1, ce_type);
             void *vp_current_value = get_vp_value(vp_array, j, ce_type);
-            if (is_samller(vp_current_value, vp_previous_value, ce_type) == 1)
+            if (is_samller(vp_current_value, vp_previous_value, ce_type) == true)
             {
                 set_vp_value(vp_switch, vp_current_value, ce_type);
                 set_vp_value(vp_current_value, vp_previous_value, ce_type);
