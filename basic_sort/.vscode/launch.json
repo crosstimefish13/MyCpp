@@ -8,7 +8,7 @@
             "name": "debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/output/debug/bin/basic_sort_lib.exe",
+            "program": "${workspaceRoot}/output/debug/bin/program.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

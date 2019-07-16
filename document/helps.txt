@@ -5,3 +5,4 @@ MinGW安装教程: https://www.cnblogs.com/ggg-327931457/p/9694401.html
 VSCode 同步设置及扩展插件 实现设备上设置统一: https://www.cnblogs.com/kenz520/p/7416836.html
 makefile 条件语句: https://www.cnblogs.com/zgq0/p/8716150.html
 VSCode makefile 设置: https://www.jianshu.com/p/535a3131ccd8
+makefile 库文件生成: https://blog.csdn.net/daidaihema/article/details/80902012
